@@ -334,9 +334,9 @@ final class ApiClient {
 	 * @param  string|array $fields
 	 * @return \HelpScout\Collection
 	 */
-	public function getCustomers($page=1, $fields=null) {
+	public function getCustomers($page=1, $fields=null, $params = []) {
 		return $this->getCollection(
-			'customers.json', $this->getParams(array('fields' => $fields, 'page' => $page)), 'getCustomers', '\HelpScout\model\Customer'
+			'customers.json', $this->getParams(array_merge(array('fields' => $fields, 'page' => $page), $params)), 'getCustomers', '\HelpScout\model\Customer'
 		);
 	}
 
@@ -785,7 +785,7 @@ final class ApiClient {
 	 * @param  array  $accepted
 	 * @return null|array
 	 */
-	private function getParams($params=null, array $accepted=array('page','fields','firstName','lastName','email','query','sortField','sortOrder')) {
+	private function getParams($params=null, array $accepted=array('page','fields','firstName','lastName','email','query','sortField','sortOrder','modifiedSince')) {
 		if (!$params) {
 			return null;
 		}
